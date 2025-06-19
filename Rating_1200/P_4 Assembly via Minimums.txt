@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+void fun() {
+   int n;
+   cin>>n;
+   vector<ll>a(n),b;
+   for(int i=0;i<(n*(n-1))/2;i++){
+      int in;
+      cin>>in;
+      b.push_back(in);
+   }
+   sort(b.begin(),b.end());
+    int index = n-2;
+    int j=2;
+   for(int i=0;i<=n-1;i++){
+     a[i]=b[index];
+     index+=(n-j);
+     j++;
+   }
+
+   for(int i=0;i<n;i++){
+    cout<<a[i]<<" ";
+   }
+   cout<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}
