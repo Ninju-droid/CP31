@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+/* If You are Using the CPP version 14 then you will require gcd other wise you find gcd as inbuilt function  */
+int gcd(int a, int b) {
+    while(b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+void fun() {
+  int n;
+  cin>>n;
+  vector<int>a(n);
+  set<int>st;
+  for(int i=1;i<=n;i++){
+   cin>>a[i-1];
+   st.insert(abs(a[i-1]-i));
+  }
+  int ans =0;
+  for(auto it = st.begin(); it != st.end(); ++it){
+      ans = gcd(ans,*it);
+  }
+   cout<<ans<<endl;
+}
+
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+   int t;
+   cin>>t;
+   while(t--){ 
+    fun();
+   }
+    return 0;
+}

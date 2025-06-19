@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void fun(){
+ int n,x;
+ cin>>n>>x;
+ vector<int>a(n,0);
+ int mdist =0;
+ for(int i =0;i<n;i++){
+   cin>>a[i];
+  if(i>0){
+    mdist = max(mdist,a[i]-a[i-1]);
+  }
+ }  
+ mdist = max(mdist,a[0]);
+ mdist = max(mdist, 2*(x-a[n-1]));
+  cout<<mdist<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+   int t;
+   cin>>t;
+   while(t--){ 
+    fun();
+   }
+    return 0;
+}

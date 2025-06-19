@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void fun(){
+ int n,k;
+ cin>>n>>k;
+ vector<int>a(n,0);
+ for(int i=0;i<n;i++)cin>>a[i];
+  if (is_sorted(a.begin(), a.end()) || k > 1)
+  {
+   cout<<"YES"<<endl;
+   } 
+   else cout<<"NO"<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+   int t;
+   cin>>t;
+   while(t--){ 
+    fun();
+   }
+    return 0;
+}
+ 

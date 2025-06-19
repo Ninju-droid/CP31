@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void fun() {
+ int a,b,c;
+ cin>>a>>b>>c;
+ string ans;
+ if(c%2==0){
+   if(a>b)printf("First\n");
+   else printf("Second\n");
+ }
+ else{
+   if(b>a)printf("Second\n");
+   else printf("First\n");
+ }
+}
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}
