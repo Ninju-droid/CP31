@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void fun(){
+    int n,k,x;
+    cin>>n>>k>>x;
+    if(x!=1){
+        cout<<"YES"<<endl;
+        cout<<n<<endl;
+        for(int i=1;i<=n;i++){
+            cout<<1<<" ";
+        }
+        cout<<endl;
+        return;
+    }
+    else{
+        if(n==3 && k<3){
+            cout<<"NO"<<endl;
+            return;
+        }
+        else if(n%2==0 && k>=2){
+            int sum=0;
+            cout<<"YES"<<endl;
+            cout<<n/2<<endl;
+            while(sum<n){
+                sum+=2;
+                cout<<2<<" ";
+            }
+            cout<<endl;
+            return;
+        }
+        else if(n%2 != 0 && k>=3){
+            int sum=3;
+            cout<<"YES"<<endl;
+            cout<<n/2<<endl;
+            cout<<3<<" ";
+            while(sum<n){
+                sum+=2;
+                cout<<2<<" ";
+            }
+            cout<<endl;
+            return;
+        }
+        else cout<<"NO"<<endl;
+    }
+}
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}
+ 

@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int c(int a,int b){
+   if(a>5) a=10-a;
+   else if(a==4 || a==5) a=5;
+   else a=a+1;
+
+   if(b>5)  b=10-b;
+   else if(b==4 || b==5) b=5;
+   else b=b+1;
+
+   int r = min(a,b);
+   return r;
+}
+void fun(){
+ vector<string>t(10);
+int cnt=0;
+   for(int i=0;i<10;i++){
+    cin>>t[i];
+   }
+
+ for(int i=0;i<10;i++){
+    for(int j=0;j<10;j++){
+        if(t[i][j]=='X'){
+            cnt+=c(i,j);
+        }
+    }
+ }
+cout<<cnt<<endl;
+return;
+
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}

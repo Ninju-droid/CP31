@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void fun() {
+  int a,b;
+  cin>>a>>b;
+  int xk,yk;
+  cin>>xk>>yk;
+  int xq,yq;
+  cin>>xq>>yq;
+  int drow[]={a,-a,a,-a,b,b,-b,-b};
+  int dcol[]={b,b,-b,-b,a,-a,a,-a};
+  set<pair<int,int>>k;
+  set<pair<int,int>>q;
+  for(int i=0;i<8;i++){
+    pair<int,int>p = {xk+drow[i] , yk+dcol[i]};
+    k.insert(p);
+    p = {xq+drow[i] , yq+dcol[i]};
+    q.insert(p);
+  }
+
+  int cnt=0;
+  for(auto it1 = k.begin(); it1 != k.end(); it1++){
+    for(auto it2 = q.begin(); it2 != q.end(); it2++){
+        if(*it1 == *it2)cnt++;
+    }
+  }
+  cout<<cnt<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}
+ 

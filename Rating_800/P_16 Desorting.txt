@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){
+  int n;
+  cin>>n;
+  vector<ll>a(n);
+  for(int i=0;i<n;i++) cin>>a[i];
+
+  for(int i =1;i<n;i++){
+    if(a[i]<a[i-1]) {
+        cout<<0<<endl;
+        return;
+    }
+  }
+  ll mini = INT_MAX;
+  for(int i =0;i<n-1;i++){
+     mini = min(mini,a[i+1]-a[i]);
+  }
+   cout<<mini/2 +1<<endl;
+}
+
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}

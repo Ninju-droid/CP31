@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){
+  int n;
+  cin>>n;
+  vector<ll>a(n);
+  for(int i=0;i<n;i++)cin>>a[i];
+  ll maxi = INT_MIN;
+  int maxCnt =0;
+  for(int i=0;i<n;i++){
+     if(a[i]==maxi)maxCnt++;
+     if(a[i]>maxi){
+        maxCnt=1;
+        maxi = a[i];
+     }
+  }
+   if(maxCnt==n || maxCnt==0){
+    cout<<-1<<endl;
+    return;
+   }
+   cout<<n-maxCnt<<" "<<maxCnt<<endl;
+    for(int i =0;i<n;i++){
+        if(a[i]==maxi) continue;
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+    for(int i=0;i<maxCnt;i++){
+        cout<<maxi<<" ";
+    }
+}
+
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}
