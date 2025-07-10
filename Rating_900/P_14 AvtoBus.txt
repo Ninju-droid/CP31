@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+void fun(){
+  ll n;
+  cin>>n;
+  ll maxi =0;
+  ll mini =0;
+  maxi = n/4;
+  if((n%4 != 0 && n%4 != 2)|| n<4){
+    cout<<-1<<endl;
+    return;
+  }
+  mini = n/6;
+  if(n%6==2 || n%6==4)mini++;
+
+  cout<<mini<<" "<<maxi<<endl;
+  return;
+
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin>>t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}

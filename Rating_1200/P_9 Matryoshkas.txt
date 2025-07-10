@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+# define ll long long 
+
+void fun(){
+   int n;
+   cin>>n;
+   vector<int>a(n);
+   map<int,int>mp;
+   for(int i=0;i<n;i++){
+   	cin>>a[i];
+   	mp[a[i]]++;
+   }
+   int ans = 0;
+   while(!mp.empty()){
+   	vector<int>toErase;
+   	for(auto& it:mp){
+   		int key = it.first;
+   		int value = it.second;
+   		mp[key] = value-1;
+   		if(mp[key]==0){
+   			toErase.push_back(key);
+   		}
+   		if(mp.find(key+1)==mp.end())break;
+   	}
+   	for(int key:toErase){
+   		mp.erase(key);
+   	}
+   	ans++;
+   }
+   cout<<ans<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
+

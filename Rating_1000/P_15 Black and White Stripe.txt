@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+void fun() {
+int n,k;
+cin>>n>>k;
+string s;
+cin>>s;
+int mini = INT_MAX;
+int cnt = 0;
+for(int i=0;i<k;i++){
+    if(s[i]=='W')cnt++;
+}
+mini = min(mini,cnt);
+for(int i=k;i<n;i++){
+    if(s[i]=='B' && s[i-k]=='W')cnt--;
+    else if(s[i]=='W' && s[i-k]=='B')cnt++;
+    mini = min(mini,cnt);
+}
+cout<<mini<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}

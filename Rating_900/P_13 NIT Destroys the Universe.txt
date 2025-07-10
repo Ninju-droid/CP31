@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+void fun(){
+  int n;
+  cin>>n;
+  vector<int>a(n);
+  int cntZeros=0;
+  bool isZero = false;
+  for(int i=0;i<n;i++){
+    cin>>a[i];
+    if(a[i]==0)cntZeros++;
+  }
+  int left =0,right =n-1;
+  while(a[left]==0) left++;
+  while(a[right]==0)right--;
+  for(int i = left ;i<=right;i++){
+    if(a[i]==0)isZero = true;
+  }
+  if(cntZeros==n){
+    cout<<0<<endl;
+  }
+  else if(isZero){
+    cout<<2<<endl;
+  }
+  else {
+    cout<<1<<endl;
+  }
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin>>t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}

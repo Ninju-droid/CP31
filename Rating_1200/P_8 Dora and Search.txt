@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+# define ll long long 
+
+void fun(){
+   int n;
+   cin>>n;
+   vector<int>a(n);
+   for(int i=0;i<n;i++)cin>>a[i];
+   int low = 0 , high = n-1;	
+	int mini = 1;
+	int maxi = n;
+    while((a[low]==mini || a[low]==maxi ||a[high]==mini || a[high]==maxi )&& low<high){
+    	if(a[low]==mini) {
+    		mini++;
+    		low++;
+    	}
+    	else if(a[low]==maxi){
+    		maxi--;
+    		low++;
+    	}
+    	if(a[high]==mini) {
+    		mini++;
+    		high--;
+    	}
+    	else if(a[high]==maxi){
+    		maxi--;
+    		high--;
+    	}
+    	
+    }
+
+    if(low>=high){
+    	cout<<-1<<endl;
+    	return;
+    }
+
+    cout<<low+1<<" "<<high+1<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
+

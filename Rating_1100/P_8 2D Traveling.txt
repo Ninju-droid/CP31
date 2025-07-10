@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+void fun() {
+    ll n, k, a, b;
+    cin >> n >> k >> a >> b;
+    vector<pair<ll, ll>> cities(n);
+    for (ll i = 0; i < n; i++) {
+        cin >> cities[i].first >> cities[i].second;
+    }
+
+    // If both are special
+    if (a <= k && b <= k) {
+        cout << 0 << endl;
+        return;
+    }
+
+    // If no special cities exist
+    if (k == 0) {
+        ll direct = abs(cities[a - 1].first - cities[b - 1].first)
+                  + abs(cities[a - 1].second - cities[b - 1].second);
+        cout << direct << endl;
+        return;
+    }
+
+    ll minia = LLONG_MAX;
+    ll minib = LLONG_MAX;
+
+    for (ll i = 0; i < k; i++) {
+        ll cnta = abs(cities[a - 1].first - cities[i].first)
+                + abs(cities[a - 1].second - cities[i].second);
+        ll cntb = abs(cities[b - 1].first - cities[i].first)
+                + abs(cities[b - 1].second - cities[i].second);
+        minia = min(minia, cnta);
+        minib = min(minib, cntb);
+    }
+
+    if (a <= k) {
+        cout << minib << endl;
+    } else if (b <= k) {
+        cout << minia << endl;
+    } else {
+        ll direct = abs(cities[a - 1].first - cities[b - 1].first)
+                  + abs(cities[a - 1].second - cities[b - 1].second);
+        cout << min(direct, minia + minib) << endl;
+    }
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}

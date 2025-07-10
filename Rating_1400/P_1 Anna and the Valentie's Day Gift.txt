@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+ll cntzeros(ll x){
+    ll cnt =0;
+    while(x>0){
+        if(x%10!=0)break;
+        cnt++;
+        x/=10;
+    }
+    return cnt;
+}
+void fun() {
+    int n,m;
+    cin>>n>>m;
+    vector<ll>a(n),z(n);  
+    ll cnt =0;
+    for (int i = 0; i < n; i++) {
+        cin>>a[i];
+        cnt += (ll)log10(a[i]) + 1;
+        z[i] =  cntzeros(a[i]);
+    }
+    sort(z.begin(),z.end(),greater<ll>());
+    for(int i = 0;i<n;i+=2){
+        cnt-=z[i];
+    } 
+ if(cnt>m)cout<<"Sasha"<<endl;
+ else cout<<"Anna"<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin>>t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}

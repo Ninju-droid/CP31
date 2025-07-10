@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+void fun(){
+  int n;
+  cin>>n;
+  vector<int>a(n);
+  for(int i=0;i<n;i++)cin>>a[i];
+  int q;
+  cin>>q;
+  vector<pair<int,int>>queries(q);
+  for(int i=0;i<q;i++){
+    cin>>queries[i].first;
+    cin>>queries[i].second;
+  } 
+  vector<int>diff(n);
+  diff[0] = -1;
+  int last =-1;
+  for(int i=1;i<n;i++){
+    if(a[i]==a[i-1]){
+      diff[i]=last;
+    }
+    else{
+      last = i-1;
+      diff[i] = last;
+    }
+  } 
+ for(int i=0;i<q;i++){
+  int l = queries[i].first;
+  int r = queries[i].second;
+  if(diff[r-1]>=(l-1)){
+    cout<<diff[r-1]+1<<" "<<r<<endl;
+  }
+  else cout<<-1<<" "<<-1<<endl;
+ }
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin>>t;
+    while (t--) {
+        fun();
+    }
+    return 0;
+}
+
