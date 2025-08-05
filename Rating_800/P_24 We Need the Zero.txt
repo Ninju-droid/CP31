@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){
+    int n;
+    cin>>n;
+    vector<int>a(n);
+    vector<int>hash(8);
+    for(int i=0;i<n;i++)cin>>a[i];
+
+    for(int i=0;i<n;i++){
+        for(int j=0;j<8;j++){
+            if(a[i] &(1<<j))hash[j]++;
+        }
+    }
+    int ans =0;
+    if(n%2!=0){
+        for(int i=0;i<8;i++){
+            if(hash[i]%2==1){
+                ans+=pow(2,i);
+            }
+        }
+    }
+    else{
+        for(int i=0;i<8;i++){
+            if(hash[i]%2==1){
+                cout<<-1<<endl;
+                return;
+            }
+            else if(hash[i]){
+                ans+=pow(2,i);
+            }
+        }
+    }
+cout<<ans<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
+

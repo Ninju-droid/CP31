@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    int l =0;
+    int r = n-1;
+    while(l<=r && s[l]!=s[r]){
+        l++;
+        r--;
+        if(l==r){
+            cout<<1<<endl;
+            return;
+        }
+    }
+    cout<<r-l+1<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
+

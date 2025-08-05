@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+ll next_prime(ll n){
+    for(ll i=n;;i++){
+        bool isprime=true;
+        for(ll j=2;j*j<=i;j++){
+            if(i%j==0){
+                isprime = false;
+                break;
+            }
+        }
+        if(isprime) return i;
+    }
+}
+
+void fun(){ 
+   ll d;
+   cin>>d;
+   ll p = next_prime(d+1);
+   ll q = next_prime(p+d);
+   ll a = min(1ll*p*p*p,1ll*p*q);
+   cout<<a<<endl;
+   return;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

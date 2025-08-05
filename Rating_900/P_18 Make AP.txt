@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){
+  ll a,b,c;
+  cin>>a>>b>>c;
+  ll aa = b-(c-b);
+  if(aa>0 && aa>=a && aa%a==0){
+    cout<<"yes"<<endl;
+    return;
+  }
+
+ if((a+c)%2==0){
+    ll bb = (a+c)/2;
+    if(bb>0 && bb>=b && bb%b==0){
+        cout<<"yes"<<endl;
+        return;
+    }
+ }
+
+  ll cc = b+(b-a);
+  if(cc>0 && cc>=c &&cc%c==0){
+    cout<<"yes"<<endl;
+    return;
+  }
+
+  cout<<"no"<<endl;
+  return;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
+

@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){ 
+    ll a,b;
+    cin>>a>>b;
+    ll x = 0,y = 0;
+    while(a%2==0 || b%2==0){
+        if(a%2==0){
+            a/=2;
+            x++;
+        }
+        if(b%2==0){
+            b/=2;
+            y++;
+        }
+    }
+    if(a!=b){
+        cout<<-1<<endl;
+        return;
+    }
+    else{
+        cout<<(abs(x-y)+2)/3<<endl;
+    }
+
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

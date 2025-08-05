@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+# define ll long long 
+# define mod 10e9+7
+void fun(){
+    ll n;
+    cin>>n;
+    vector<ll>a(n);
+    for(ll i=0;i<n;i++)cin>>a[i];
+    ll low = 0;
+    ll high = n-1;
+    ll ans = 0;
+    while(low<high){
+        ll diff = abs(a[low]-a[high]);
+        ans = __gcd(ans,diff);
+        low++;
+        high--;
+    }
+    cout<<ans<<endl;    
+}
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
+

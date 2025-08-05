@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){ 
+  int n;
+  cin>>n;
+  string s;
+  cin>>s;
+  int l=0,r=0,diff=0;
+  for(int i=0;i<n;i++){
+    char ch = s[i];
+    if(ch=='(')l++;
+    else r++;
+    if(r>l){
+        diff = max(diff,r-l);
+    }
+  }
+cout<<diff<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+# define ll long long 
+
+void fun(){
+   ll a,b,c,d;
+   cin>>a>>b>>c>>d;
+   ll cnt =0;
+   if(b>d) {
+    cout<<-1<<endl;
+    return;
+   }
+   else{
+    a+=(d-b);
+    cnt+=(d-b);
+    b=d;
+    if(a<c){
+        cout<<-1<<endl;
+        return;
+    }
+    else{
+        cnt+=(a-c);
+        cout<<cnt<<endl;
+        return;
+    }
+   }
+cout<<-1<<endl;
+}
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
+

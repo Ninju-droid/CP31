@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+# define ll long long 
+# define mod 1000000000+7
+void fun() {
+    ll n;
+    cin >> n;
+
+    vector<ll> a(n), b(n);
+    for (ll &x : a) cin >> x;
+    for (ll &x : b) cin >> x;
+
+    vector<ll> diff(n);
+    for (int i = 0; i < n; ++i)
+        diff[i] = b[i] - a[i];
+
+    sort(diff.begin(), diff.end());
+
+    int left = 0;
+    int right = n - 1;
+    int count = 0;
+
+    while (left < right) {
+        if (diff[left] + diff[right] >= 0) {
+            count++;
+            left++;
+            right--;
+        } else {
+            left++; 
+        }
+    }
+
+    cout << count << endl;
+}
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
+
