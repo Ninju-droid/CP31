@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+void fun(){
+   ll n,k;cin>>n>>k; 
+   map<ll,ll>mp;
+   for(ll i=0;i<n;i++){
+    ll x;cin>>x; 
+    x%=k; 
+    mp[x]++;
+   }
+   mp.erase(0);
+   ll cnt = 0;
+   for(auto it = mp.begin();it!=mp.end();it++){
+       ll val = it->second;
+       ll key = it->first;
+       cnt = max(cnt,k*(val-1)+(k-key)+1);
+   }
+   cout<<cnt<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

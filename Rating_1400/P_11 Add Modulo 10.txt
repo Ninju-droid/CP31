@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+bool check(ll x,ll y){
+    ll a = min(x,y);
+    ll b = max(x,y);
+    if(a%10==0 || b%10==0){
+        if(a==b)return true;
+        else return false;
+    }
+    a += ((b-a)/20)*20;
+    while(a<b){
+        ll m = a%10;
+        a+=m;
+        if(a%10==0)break;
+    }
+    if(a==b)return true;
+    else return false;
+
+}
+
+void fun(){
+    ll n;cin>>n;
+    vector<ll>a(n);
+    for(ll i=0;i<n;i++){
+        ll x; cin>>x;
+        if(x%2){
+            ll y = x%10;
+            x+=y;
+        }
+        a[i] = x;
+    }
+    for(ll i = 1;i<n;i++){
+        if(!check(a[i],a[i-1])){
+            cout<<"no"<<endl;
+            return;
+        }
+    }
+    cout<<"yes"<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){ 
+   ll n;
+   cin>>n;
+   vector<ll>a(n);
+   for(ll i=0;i<n;i++)cin>>a[i];
+   ll k = 1; 
+   for(ll i = n-2;i>=0;i--){
+     if(a[i]==a[i+1])k++;
+     else break;
+   } 
+   if(k==n){
+    cout<<0<<endl;
+    return;
+   }
+   ll ans = 0;
+   ll i = n-1-k;
+   while(i>=0){
+    if(a[i]!=a[n-1]){
+        ans++;
+        k*=2;
+        if(k>=n){
+            cout<<ans<<endl;
+            return;
+        }
+         i = n-k-1;
+    }
+    else{
+        i--;
+        k++;
+    }
+   }
+ cout<<ans<<endl;
+} 
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

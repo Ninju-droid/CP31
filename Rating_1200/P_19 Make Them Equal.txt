@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){ 
+   ll n ;
+   char c;
+   string s;
+   cin>>n>>c>>s;
+   bool AllRight = true;
+   for(char x:s){
+     if(x!=c) AllRight = false;
+   }
+   if(AllRight){
+    cout<<0<<endl;
+    return;
+   }
+   for(ll i=1;i<=n;i++){
+      bool ok = true;
+      for(ll j=i;j<=n;j+=i){
+          if(s[j-1]!=c)ok = false;
+      }
+      if(ok){
+        cout<<1<<endl;
+        cout<<i<<endl;
+        return;
+      }
+   }
+   cout<<2<<endl;
+   cout<<n<<" "<<n-1<<endl;
+   return;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

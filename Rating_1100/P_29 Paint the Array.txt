@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){ 
+   ll n;
+   cin>>n;
+   vector<ll>a(n);
+   ll gcd1 = a[0],gcd2=a[1];
+   for(ll i=0;i<n;i++){
+    cin>>a[i];
+    if(i%2==0){
+        gcd1=__gcd(gcd1,a[i]);
+    }
+    else{
+        gcd2=__gcd(gcd2,a[i]);
+    }
+   }
+   bool is_btfl = true;
+   for(ll i=0;i<n;i+=2){
+    if(a[i]%gcd2==0){
+        is_btfl = false;
+    }
+   }
+   if(is_btfl){
+    cout<<gcd2<<endl;
+    return;
+   }
+   is_btfl = true;
+   for(ll i =1;i<n;i+=2){
+    if(a[i]%gcd1==0)is_btfl=false;
+   }
+   if(is_btfl){
+    cout<<gcd1<<endl;
+    return;
+   }
+   cout<<0<<endl;
+} 
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

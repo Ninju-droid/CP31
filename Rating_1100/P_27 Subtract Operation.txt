@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){ 
+   ll n,k;
+   cin>>n>>k;
+   vector<ll>a(n);
+   for(ll i=0;i<n;i++)cin>>a[i];
+    
+   map<ll,bool>mp;
+   for(auto it:a){
+    mp[it]=true;
+   } 
+   for(ll i=0;i<n;i++){
+    if(mp.find(a[i]-k)!=mp.end()){
+        cout<<"YES"<<endl;
+        return;
+    }
+   }
+ cout<<"NO"<<endl;
+} 
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

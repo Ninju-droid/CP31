@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+void fun(){ 
+   ll n,x,m;
+   cin>>n>>x>>m;
+   ll mini = x;
+   ll maxi = x;
+   for(ll i=0;i<m;i++){
+     ll left,right;
+     cin>>left ; cin>>right;
+     if (right < mini || left > maxi) continue;
+        mini = min(mini, left);
+        maxi = max(maxi, right);
+   }
+   ll ans = maxi-mini+1;
+   cout<<ans<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

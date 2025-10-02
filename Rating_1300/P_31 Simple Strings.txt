@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+void fun(){
+    string s;
+    cin>>s;
+    ll n = s.size();
+    for(ll i=1;i<n;i++){
+        if(s[i]==s[i-1]){
+            char ch = 'a';
+            while((ch==s[i+1] && i<n-1) || ch==s[i-1])ch++;
+            s[i]=ch;
+        }
+    }
+  cout<<s<<endl;
+}
+ 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    fun();
+    return 0;
+}

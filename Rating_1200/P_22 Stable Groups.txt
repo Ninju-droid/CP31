@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    ll n,k,x;
+    cin>>n>>k>>x;
+    vector<ll>a(n);
+    for(ll i=0;i<n;i++)cin>>a[i];
+    sort(a.begin(),a.end());
+
+    vector<ll> gaps;
+    for(ll i=1;i<n;i++){
+    if(a[i]-a[i-1] > x){
+        gaps.push_back(a[i]-a[i-1]);
+    }
+    }
+ll ans = 1 + gaps.size(); 
+sort(gaps.begin(), gaps.end());
+for(auto g : gaps){
+    ll need = (g-1)/x; // kitne bridges chahiye
+    if(k >= need){
+        k -= need;
+        ans--;
+    } else break;
+}
+cout << ans << endl;
+   
+    return 0;
+}
+

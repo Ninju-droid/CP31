@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+void fun(){ 
+    ll n;
+    cin>>n;
+    vector<ll>a(n);
+    for(ll i=0;i<n;i++)cin>>a[i];
+    vector<ll>ans;
+    ll last = a[0];
+    ans.push_back(last);
+    for(ll i=1;i<n-1;i++){
+       ll cur = a[i];
+       if(last<cur&&cur<a[i+1])continue;
+       else if(last>cur&&cur>a[i+1])continue;
+       else{
+         last = cur;
+         ans.push_back(last);
+       }
+    } 
+    ans.push_back(a[n-1]);
+    n = ans.size();
+    cout<<n<<endl;
+    for(ll i=0;i<n;i++){
+        cout<<ans[i]<<" ";
+    } 
+    cout<<endl;  
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

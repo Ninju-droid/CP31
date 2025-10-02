@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){ 
+  ll n;
+  cin>>n;
+  ll ans = 1;
+  for(ll i=2;i<=1000;i++){
+    ans += i;
+    ll cnt = i*i;
+     while(ans<=n){
+        ans += cnt;
+        if(ans==n){
+            cout<<"YES"<<endl;
+            return;
+        }
+        cnt*=i;
+     }
+     ans =1;
+  }
+  cout<<"NO"<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

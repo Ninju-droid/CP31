@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+void fun(){ 
+   ll n;
+   cin>>n;
+   string s;
+   cin>>s;
+   ll ans = INT_MAX;
+   for(char ch='a';ch<='z';ch++){
+      ll low = 0,high = n-1;
+      ll cnt = 0;
+      while(low<high){
+         if(s[low]==s[high]){
+            low++;
+            high--;
+         }
+         else if(s[low]!=s[high] && s[low]==ch){
+            cnt++;
+            low++;
+         }
+         else if(s[low]!=s[high] && s[high]==ch){
+            cnt++;
+            high--;
+         }
+         else{
+            cnt = INT_MAX;
+            break;
+         }
+      }
+      ans = min(ans,cnt);
+   }
+   if(ans==INT_MAX)cout<<-1<<endl;
+   else cout<<ans<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

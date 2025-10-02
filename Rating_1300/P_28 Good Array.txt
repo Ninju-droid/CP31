@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+void fun(){
+    ll n;
+    cin>>n;
+    vector<ll>a(n);
+    map<ll,vector<ll>>mp;
+    ll sum = 0;
+    for(ll i=0;i<n;i++){
+        cin>>a[i];
+        sum+=a[i];
+        mp[a[i]].push_back(i+1);
+    }
+    vector<ll>ans;
+    for(auto it = mp.begin(); it != mp.end(); ++it){
+        ll key = it->first;
+        vector<ll> &value = it->second;
+        if((sum-key)%2==0){
+            if(mp.find((sum-key)/2)!=mp.end()){
+                if((sum-key)/2==key && value.size()<2)continue;
+                ans.insert(ans.end(),value.begin(),value.end());
+            }
+        }
+        else continue;
+    }
+    cout<<ans.size()<<endl;
+    for(ll x:ans)cout<<x<<" ";
+    cout<<endl;    
+}
+ 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    fun();
+    return 0;
+}

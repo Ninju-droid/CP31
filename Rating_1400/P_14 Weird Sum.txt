@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+void fun(){
+   ll n,m; cin>>n>>m; 
+   vector<vector<ll>>p(100001);
+   vector<vector<ll>>q(100001);
+
+   for(ll i=0;i<n;i++){
+    for(ll j=0;j<m;j++){
+        ll x; cin>>x;
+        p[x].push_back(i+1);
+        q[x].push_back(j+1);
+    }
+   }
+   ll sum = 0;
+   for(ll i=0;i<100001;i++){
+     ll s = p[i].size();
+     if(s<2)continue;
+     sort(p[i].begin(),p[i].end());
+     sort(q[i].begin(),q[i].end());
+     vector<ll>pre_p(s),pre_q(s);
+     pre_p[s-1] = p[i][s-1];
+     for(ll j = s-2;j>=0;j--){
+        pre_p[j] = pre_p[j+1]+p[i][j];
+     }
+     pre_q[s-1] = q[i][s-1];
+     for(ll j = s-2;j>=0;j--){
+        pre_q[j] = pre_q[j+1]+q[i][j];
+     }
+     for(ll j=0;j<s-1;j++){
+        sum += (pre_p[j+1]-(s-j-1)*p[i][j]);
+     }
+     for(ll j=0;j<s-1;j++){
+        sum += (pre_q[j+1]-(s-j-1)*q[i][j]);
+     }
+   }
+   cout<<sum<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t=1;
+    while (t--) fun();
+    return 0;
+}

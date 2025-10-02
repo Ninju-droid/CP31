@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+ 
+ll cntFact(ll n,ll p){
+    ll cnt = 0;
+    while(n%p==0){
+        n/=p;
+        cnt++;
+    }
+    return cnt;
+}
+ 
+void fun(){
+    ll n,m; cin>>n>>m; 
+    ll tows = cntFact(n,2);
+    ll fives = cntFact(n,5);
+    ll k = 1;
+ 
+    while(tows<fives && k*2 <=m){
+        k*=2;
+        tows++;
+    }
+    while(fives<tows && k*5 <=m){
+        k*=5;
+        fives++;
+    }
+ 
+    while(k*10 <=m)k*=10;
+ 
+    k*= (m/k);
+    cout<<n*k<<endl;
+}
+ 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}
