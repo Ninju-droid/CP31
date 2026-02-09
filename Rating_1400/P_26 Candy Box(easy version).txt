@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+
+
+/*             THIS IS THE INTIUTION AND THOUGHT PROCESS
+This solution counts how many candies of each type exist, sorts these frequencies in descending order, and then ensures each chosen frequency is strictly smaller than the previous one to keep all counts distinct.
+It greedily reduces each frequency to the largest possible valid value (not exceeding the previous − 1 So take it = max(it,0)).
+*/
+
+void fun() {
+   ll n;cin>>n; 
+   map<ll,ll>mp;
+   for(ll i=0;i<n;i++){
+    ll x; cin>>x;
+    mp[x]++;
+   }
+   vector<ll>a;
+   ll prev = LLONG_MAX,ans=0;
+   for(auto it=mp.rbegin();it!=mp.rend();it++){
+    ll cnt = it->second;
+    a.push_back(cnt);
+   }
+   sort(a.rbegin(),a.rend());
+   for(auto it:a){
+     it = min(it,prev-1);
+     it = max(it,0ll);
+     ans+=it;
+     prev = it; 
+   }
+   cout<<ans<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

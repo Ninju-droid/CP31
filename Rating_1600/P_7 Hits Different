@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#ifndef ONLINE_JUDGE
+    #include "Others.h" 
+#endif
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif  
+   vector<ll>ans;
+   vector<vector<ll>>dp(2023,vector<ll>(2023,0));
+   ll ind = 1; 
+   for(ll i=1;i<2023;i++){
+    for(ll j=1;j<=i;j++){
+        if(j==i)dp[i][j] = ind*ind;  
+        else{
+            dp[i][j] = ind*ind + dp[i-1][j]; 
+        }
+        ind++;
+    } 
+   }
+   ans.push_back(1);
+   for(ll i=2;i<2023;i++){
+    for(ll j=1;j<=i;j++){
+        if(j!=1){
+            dp[i][j] += dp[i-1][j-1]; 
+        }
+        ans.push_back(dp[i][j]); 
+    } 
+   }
+   int t = 1;
+   cin>>t;
+   while(t--){
+    ll val ; cin>>val ;
+    val = ans[val-1]; 
+    cout<<val<<endl;
+   }
+   return 0 ; 
+}

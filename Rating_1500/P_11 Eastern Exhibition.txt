@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll ;
+ll mod = 1e9+7;
+
+ll points(vector<ll>&a,ll n){
+    sort(a.begin(),a.end());
+    return a[n / 2] - a[(n - 1) / 2] + 1;
+}
+
+void fun() {
+    ll n;cin>>n; 
+    vector<ll>a(n),b(n);
+    for(ll i=0;i<n;i++){
+        cin>>a[i];cin>>b[i];
+    }
+    ll ans = (points(a,n))*(points(b,n));
+    cout<<ans<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+}

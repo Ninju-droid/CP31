@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+void trv(ll val,vector<set<ll>>&vec,vector<ll>&vis){
+    if(vis[val]) return ;
+    vis[val] = 1; 
+    for(auto it : vec[val]){
+        trv(it,vec,vis); 
+    }
+}
+
+void fun(){
+    ll n;cin>>n; 
+    vector<ll>a(n+1); 
+    vector<set<ll>>vec(n+1); 
+    for(ll i=1;i<=n;i++){
+        cin>>a[i];
+        vec[a[i]].insert(i);  
+        vec[i].insert(a[i]);
+    } 
+    ll total=0; 
+    stack<ll>st;
+    vector<ll>vis(n+1,0);  
+    st.push(1);
+    for(ll i=1;i<=n;i++){ 
+        if(vis[i])continue;  
+        trv(i,vec,vis);
+        total++; 
+    }
+    ll open = 0 ; 
+    for(ll i=1;i<=n;i++){
+        if(vec[i].size()<2)open++; 
+    }
+    open/=2; 
+    if(open)open--; 
+    cout<<total-(open)<<" "<<total<<endl;
+
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+   int t = 1;
+   cin>>t;
+   while(t--)fun();
+   return 0 ; 
+}

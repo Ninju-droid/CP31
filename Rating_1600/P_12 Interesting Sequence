@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MOD = 998244353;
+const int MAXN = 1e6 + 5;
+#define ll long long
+#define all(x) (x).begin(), (x).end()
+#define allr(x) (x).rbegin(), (x).rend()
+ll modpow(ll base, ll exp) {
+    ll result = 1;
+    base %= MOD;
+    while (exp > 0) {
+        if (exp & 1) result = (result * base) % MOD;
+        base = (base * base) % MOD;
+        exp >>= 1;
+    }
+    return result;
+}
+ll modinv(ll a){
+    return modpow(a,MOD-2);
+}
+vector<ll> fact(MAXN);
+void precomputeFact(){
+    fact[0] = 1;
+    for(int i=1; i<MAXN; i++){
+        fact[i] = (fact[i-1]*i) % MOD;
+    }
+}
+ll nCr(int n,int r){
+    if(r>n || r<0) return 0;
+    ll denom = (fact[r] * fact[n-r]) % MOD;
+    return (fact[n]*modinv(denom)) % MOD;
+}
+
+void fill_bit(ll n , vector<ll>&bit_set){
+    for(ll i=0;i<65;i++){
+        if(n & (1ll<<i))bit_set[i] = 1; 
+    }
+}
+
+void check(ll n , ll ind , vector<ll>&a , vector<ll>&b){
+    ll ans = n+1 ; 
+    for(ll i = ind; i>=0 ; i--){
+        if(b[i]==1){
+            cout<<-1<<endl;
+            return; 
+        }
+        if(a[i]==0)ans += (1LL << i); 
+    }
+    cout<<ans<<endl;
+}
+
+void fun(){
+    ll n,x; cin>>n>>x; 
+    vector<ll>bit_in(65,0); 
+    vector<ll>bit_dest(65,0);
+    if(n<x){
+        cout<<-1<<endl;
+        return ;
+    }
+    fill_bit(n,bit_in); 
+    fill_bit(x,bit_dest); 
+ 
+    for(ll i = 63;i>=0;i--){
+        if(bit_in[i]==0 && bit_dest[i]==1){
+            cout<<-1<<endl;
+            return; 
+        }
+        if(bit_in[i]==1 && bit_dest[i]==0){
+            if(bit_in[i+1]==1){cout<<-1<<endl;return;}
+            check(n,i-1,bit_in,bit_dest); 
+            return; 
+        }
+    }
+    cout<<n<<endl;
+    return; 
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif  
+   int t = 1;
+   cin>>t;
+   while(t--)fun(); 
+   return 0 ; 
+}

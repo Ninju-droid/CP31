@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+// #define endl '\n'
+
+ll query(int a ,int b){
+    cout << "? " << a << " " << b << endl;
+    cout.flush();   // required for interactive problems
+    ll ans; 
+    cin >> ans;
+    return ans;
+}
+
+ll common(pair<ll,ll> a, pair<ll,ll> b){
+    if(a.first == b.first || a.first == b.second) return a.first;
+    else return a.second;
+}
+
+void fun() {
+    vector<ll> ans(7,0);
+    vector<ll> a = {4,8,15,16,23,42};
+    map<ll,pair<ll,ll>> mp;
+ 
+    // fixed 'i++' instead of 'i' in the inner loop
+    for(ll i=0;i<6;i++){
+        for(ll j=i+1;j<6;j++){
+            mp[a[i]*a[j]] = {a[i],a[j]};
+        }
+    }
+
+    auto fir = mp[query(1,2)];
+    auto sec = mp[query(2,3)];
+    ll com = common(fir,sec);
+    ans[2] = com;
+    ans[1] = (com==fir.first ? fir.second : fir.first);
+    ans[3] = (com==sec.first ? sec.second : sec.first);
+
+    fir = mp[query(4,5)];
+    sec = mp[query(5,6)];
+    com = common(fir,sec);
+    ans[5] = com;
+    ans[4] = (com==fir.first ? fir.second : fir.first);
+    ans[6] = (com==sec.first ? sec.second : sec.first);
+
+    cout << "! ";
+    for(ll i=1;i<=6;i++) cout << ans[i] << " ";
+    cout << endl;
+    cout.flush();
+}
+
+int main() {
+    fun();
+    return 0;
+}

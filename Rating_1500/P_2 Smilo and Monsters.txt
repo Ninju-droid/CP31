@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+
+void fun() { 
+   ll n;cin>>n;
+   vector<ll>a(n);
+   for(ll i=0;i<n;i++)cin>>a[i]; 
+   sort(a.begin(),a.end());
+   ll sum = accumulate(a.begin(),a.end(),0ll);
+   ll x = sum/2;
+   ll right=n-1,ans=sum-x;
+
+   while(right>=0){ 
+    if(x>0){ans++;x-=a[right];}
+    right--;
+   } 
+   cout<<ans<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t;
+    cin >> t;
+    while (t--) fun();
+    return 0;
+}

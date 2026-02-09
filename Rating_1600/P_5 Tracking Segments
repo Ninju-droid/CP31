@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+
+bool check(vector<pair<ll,ll>>seg , vector<ll>quer,ll mid ,ll n ,ll m){
+    vector<ll>a(n,0); 
+    for(ll i=0;i<mid; i++){
+        a[quer[i]-1]=1; 
+    }
+    vector<ll>pre(n+1,0); 
+    pre[1] = a[0]; 
+    for(ll i=2;i<=n;i++){
+        if(a[i-1])pre[i] = pre[i-1]+1; 
+        else pre[i] = pre[i-1]; 
+    }
+    for(ll i=0;i<m;i++){
+        ll l = seg[i].first , r = seg[i].second ;
+        if(pre[r]-pre[l-1] > (r-l+1)/2){
+            return true; 
+        }
+    }
+    return false;
+}
+
+void fun(){
+    ll n, m ; cin>>n>>m; 
+    vector<pair<ll,ll>>seg(m); 
+    for(ll i=0;i<m;i++){
+        cin>>seg[i].first >>seg[i].second ; 
+    }
+    ll q ;cin>>q; 
+    vector<ll>quer(q); 
+    for(ll i=0;i<q; i++)cin>>quer[i]; 
+
+    ll low = 1 , high = q , ans = LLONG_MAX; 
+    while(low<=high){
+        ll mid = low + (high-low)/2;  
+        if(check(seg,quer,mid,n,m)){
+            ans = mid ; 
+            high = mid-1; 
+        }
+        else{
+            low = mid+1 ;
+        }
+    }
+    if(ans==LLONG_MAX)cout<<-1<<endl;
+    else cout<<ans<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+   int t = 1;
+   cin>>t;
+   while(t--)fun();
+   return 0 ; 
+}

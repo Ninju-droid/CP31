@@ -1,0 +1,140 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MOD = 1e9+7;
+const int MAXN = 1e6 + 5;
+#define ll long long
+#define all(x) (x).begin(), (x).end()
+#define allr(x) (x).rbegin(), (x).rend()
+ll modpow(ll base, ll exp) {
+    ll result = 1;
+    base %= MOD;
+    while (exp > 0) {
+        if (exp & 1) result = (result * base) % MOD;
+        base = (base * base) % MOD;
+        exp >>= 1;
+    }
+    return result;
+}
+ll modinv(ll a){
+    return modpow(a,MOD-2);
+}
+vector<ll> fact(MAXN);
+void precomputeFact(){
+    fact[0] = 1;
+    for(int i=1; i<MAXN; i++){
+        fact[i] = (fact[i-1]*i) % MOD;
+    }
+}
+ll nCr(int n,int r){
+    if(r>n || r<0) return 0;
+    ll denom = (fact[r] * fact[n-r]) % MOD;
+    return (fact[n]*modinv(denom)) % MOD;
+}
+    
+bool func(ll m,vector<ll>&a,vector<ll>&b,ll n){
+    ll cnt = 0 ; 
+    for(ll i =1;i<=n;i++){
+        if(b[i]>=cnt && a[i]>= m-cnt-1)cnt++;
+    } 
+    return cnt>=m;
+}   
+
+bool vanish(string s, ll i){
+    ll len = s.size(); 
+    ll j = 0 ; 
+    while(i<len){
+        if(s[i]<s[j])return false; 
+        else if(s[i]==s[j]){
+            i++; j++; 
+        }
+        else return true;
+    }
+    return true;
+}
+
+void forward(ll i,ll j,vector<ll>&a,vector<pair<ll,pair<ll,ll>>>&vec,ll n){
+    ll cnt = 0 , neg = 0 ; 
+    for(ll k = i;k<=j;k++){
+        if(a[k]==2 || a[k]==-2)cnt++; 
+        if(a[k]<0)neg++;
+    }
+    if(neg%2==0){
+        vec.push_back({cnt,{i,n-j-1}});
+        return; 
+    }
+    
+    while(neg%2!=0 && i<=j){
+        if(a[i]<0)neg--;
+        if(a[i]==2 || a[i]==-2)cnt--; 
+        i++;
+        if(neg%2==0){
+            vec.push_back({cnt,{i,n-j-1}});
+            return;
+        } 
+    }
+    return;
+}
+
+void backward(ll i,ll j,vector<ll>&a,vector<pair<ll,pair<ll,ll>>>&vec,ll n){
+    ll cnt = 0 , neg = 0 ; 
+    for(ll k = i;k<=j;k++){
+        if(a[k]==2 || a[k]==-2)cnt++; 
+        if(a[k]<0)neg++;
+    }
+    if(neg%2==0){
+        vec.push_back({cnt,{i,n-j-1}});
+        return; 
+    } 
+    while(neg%2!=0 && i<=j){
+        if(a[j]<0)neg--;
+        if(a[j]==2 || a[j]==-2)cnt--; 
+        j--;
+        if(neg%2==0){
+            vec.push_back({cnt,{i,n-j-1}});
+            return;
+        } 
+    }
+    return;
+}
+
+void fun(){
+    ll n;cin>>n; 
+    vector<ll>a(n); 
+    for(ll i=0;i<n;i++)cin>>a[i]; 
+    vector<pair<ll,pair<ll,ll>>>vec; 
+    ll i=0,j=0; 
+    while(j<n){
+        while(a[i]==0 && i<n){
+            i++; 
+        }
+        j = i ;
+        while(a[j]!=0 && j<n){
+            j++; 
+        }
+        forward(i,j-1,a,vec,n); 
+        backward(i,j-1,a,vec,n); 
+        j++; 
+        i = j;
+    }
+    sort(vec.rbegin(),vec.rend()); 
+    if(vec.size()==0){
+        cout<<n<<" "<<0<<endl; 
+        return ;
+    }
+    if(vec[0].first==0){
+        cout<<n<<" "<<0<<endl;
+    }
+    else cout<<vec[0].second.first<<" "<<vec[0].second.second<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif  
+   int t = 1;
+   cin>>t;
+   while(t--)fun(); 
+   return 0 ; 
+}

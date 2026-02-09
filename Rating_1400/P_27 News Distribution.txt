@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define endl '\n'
+class DisjoinSet{
+public:
+    vector<ll>rank,parent,size;
+    DisjoinSet(ll n){
+        rank.resize(n+1,0);
+        size.resize(n+1,1);
+        parent.resize(n+1);
+        for(ll i=0;i<=n;i++)parent[i]=i;        
+    }   
+    
+    ll findUPar(ll node){
+        if(node==parent[node])return node;
+        return parent[node] = findUPar(parent[node]);
+    }
+
+    void unionByRank(ll u, ll v){
+        ll ulp_u = findUPar(u);
+        ll ulp_v = findUPar(v);
+        if(ulp_u==ulp_v)return;
+        if(rank[ulp_u] <rank[ulp_v]){
+            parent[ulp_u] = ulp_v;
+        }
+        else if(rank[ulp_u] > rank[ulp_v]){
+            parent[ulp_v] = ulp_u;
+        }
+        else{
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+    void unionBySize(ll u, ll v){
+        ll ulp_u = findUPar(u);
+        ll ulp_v = findUPar(v);
+        if(ulp_u==ulp_v)return;
+        if(size[ulp_u] < size[ulp_v]){
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else{
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+
+};
+void fun() {
+    ll n,m;cin>>n>>m;
+    DisjoinSet ds(n);
+    for(ll i=1;i<=m;i++){
+        ll x;cin>>x;
+        if(x==0)continue;
+        else if(x==1){
+            ll y;cin>>y;continue;
+        }
+        ll y ;cin>>y;
+        for(ll i=2;i<=x;i++){
+            ll v;cin>>v;
+            ds.unionBySize(y,v);
+            y = v;
+        }
+    }
+    for(ll i=1;i<=n;i++){
+        ll ulp = ds.findUPar(i);
+        cout<<ds.size[ulp]<<" ";
+    }
+    cout<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t=1;
+    //cin >> t;
+    while (t--) fun();
+    return 0;
+}
+

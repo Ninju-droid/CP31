@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll mod = 1e9+7;
+
+bool check(vector<ll>a , ll ind , ll val , ll mid ,ll n){ 
+    ll curr = mid; 
+    while(ind<n-2){
+        debug(curr); 
+        if(curr>val)return false; 
+        a[ind]+=curr; 
+        val-=curr;
+        if(val<0)return false ; 
+        if(a[ind] <= (a[ind+1]+1))return true;
+        curr = (a[ind]-1)-a[ind+1];  
+        ind++;
+    }
+    debug(curr);
+    if(curr>val || a[n-2]+curr>a[n-1]+1 || val<0)return false;
+    return true; 
+}
+
+void fun(){
+    ll n,k;cin>>n>>k; 
+    vector<ll>a(n); 
+    for(ll i=0;i<n;i++)cin>>a[i]; 
+    ll maxi = *max_element(a.begin(),a.end()); 
+    for(ll ind = 0;ind<n-1;++ind){
+        debug(ind) ; 
+        ll high = k , low = 0 ,cnt = a[ind]; 
+        while(low<=high){
+            ll mid = low + (high-low)/2; 
+            if(check(a,ind,k,mid,n)){
+                debug(mid);
+                cnt = max(cnt,a[ind]+mid); 
+                low = mid+1; 
+                debug(cnt); 
+                debug(low); 
+            }
+            else high = mid-1; 
+        }
+        maxi = max(maxi,cnt) ; 
+    }
+    cout<<maxi<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+   int t = 1;
+   cin>>t;
+   while(t--)fun();
+   return 0 ; 
+}

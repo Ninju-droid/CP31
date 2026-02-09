@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define endl '\n'
+
+void fun() {
+   ll n,m,k;cin>>n>>m>>k; 
+   vector<ll>a(n);
+   vector<ll>gaps;
+   for(ll i=0;i<n;i++)cin>>a[i]; 
+   ll ans = a[n-1]-a[0]+1; 
+   
+   for(ll i=1;i<n;i++){
+    gaps.push_back(a[i]-a[i-1]);
+   }
+   sort(gaps.rbegin(),gaps.rend());
+   ll it = 0;
+   ll cnt = 1;
+   while(cnt<k && it<gaps.size()){
+      cnt++;
+      ans-=(gaps[it]-1);
+      it++;
+   }
+   cout<<ans<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t=1;
+    //cin >> t;
+    while (t--) fun();
+    return 0;
+}

@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define endl '\n'
+
+void fun() {
+   ll n,k;cin>>n>>k; 
+   vector<vector<ll>>a(n+1,vector<ll>(k+1,1));
+   for(ll i=1;i<k;i++){
+     a[1][i]=0;
+   }
+   for(ll i=4;i<=n;i++){
+      for(ll j=2;j<i;j++){
+         if(i%j==0){
+            ll cnt = a[j][k];
+            for(ll it = k-1;it>=1;it--){
+                a[i][it]+=cnt;
+                cnt+=a[j][it];
+                a[i][it]%=1000000007;
+                cnt%=1000000007;
+            }
+         }
+      }
+   }
+   ll ans = 0;
+   for(ll i=1;i<=n;i++){
+    for(ll j=1;j<=k;j++){
+        ans+=a[i][j];
+        ans%=1000000007;
+    }
+   }
+   ans%=1000000007;
+   cout<<ans<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t=1;
+    while (t--) fun();
+    return 0;
+}

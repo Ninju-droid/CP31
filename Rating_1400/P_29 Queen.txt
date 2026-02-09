@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define endl '\n'
+
+void fun() {
+   ll n;cin>>n; 
+   ll root;
+   vector<vector<ll>>adj(n+1);
+   vector<ll>parent(n+1);
+   vector<bool>is_repect(n+1,false);
+   for(ll i=1;i<=n;i++){
+      ll x,y;cin>>x>>y;
+      if(x==-1){
+        root = i;
+        is_repect[i]=true;
+        continue;
+      }
+      adj[x].push_back(i);
+      parent[i] = x;
+      if(y==0)is_repect[i]=true;
+   }
+   vector<ll>ans;
+  
+   for(ll i=1;i<=n;i++){
+    if(is_repect[i])continue;
+    bool removable = true;
+    for(auto it:adj[i]){
+        if(is_repect[it]) removable=false;
+    }
+    if(removable)ans.push_back(i);
+   }
+   sort(ans.begin(),ans.end());
+   for(auto it:ans)cout<<it<<" ";
+   if(ans.size()==0)cout<<-1; 
+   cout<<endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t=1;
+    //cin >> t;
+    while (t--) fun();
+    return 0;
+}

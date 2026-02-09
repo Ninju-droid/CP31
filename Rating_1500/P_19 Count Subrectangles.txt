@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+#ifndef ONLINE_JUDGE
+    #include "Others.h" 
+#endif
+using namespace std;
+
+#define all(x) (x).begin(), (x).end()
+#define allr(x) (x).rbegin(), (x).rend()
+
+#define ll long long
+void vec(vector<ll>&a,vector<ll>&dist , ll n ){
+    ll cnt = 0 ;
+    for(ll i=0;i<n;i++){
+        if(a[i]==0){
+            for(ll j=1;j<=cnt;j++){
+                dist[j]+=(cnt-j+1);
+            }
+            cnt = 0 ; 
+        }
+        else cnt++; 
+    }
+    for(ll j=1;j<=cnt;j++){
+        dist[j]+=(cnt-j+1);
+    } 
+}
+
+void fun(){
+    ll n,m,k;cin>>n>>m>>k; 
+    vector<ll>a(n),b(m); 
+    for(ll i=0;i<n;i++)cin>>a[i]; 
+    for(ll i=0;i<m;i++)cin>>b[i]; 
+    ll ans = 0 ;
+    vector<ll>a_dist(n+1); 
+    vector<ll>b_dist(m+1); 
+    vec(a,a_dist,n); 
+    vec(b,b_dist,m); 
+
+    for(ll i=1;i*i<=k;i++){
+        if(k%i)continue; 
+        if(i<=n && k/i<=m ){
+            ans += a_dist[i]*b_dist[k/i] ; 
+        }
+        if(i!=k/i && i<=m && k/i<=n){
+            ans += a_dist[k/i]*b_dist[i] ; 
+        }
+    }
+    cout<<ans<<endl;
+}
+
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+   int t = 1;
+   //cin>>t;
+   while(t--)fun();
+   return 0 ; 
+}
