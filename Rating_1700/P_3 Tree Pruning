@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+ll func(vector<ll>&parent,ll val){
+    ll cnt  = 0 ; 
+    while(parent[val]){
+        cnt++; 
+        ll v = val; 
+        val = parent[v]; 
+        parent[v] = 0 ; 
+    }
+    return cnt; 
+}
+
+void fun() {
+    ll n;cin>>n; 
+
+    vector<vector<ll>>adj(n+1),level(n+1);
+    for(ll i=1;i<n;i++){
+        ll u,v; cin>>u>>v; 
+        adj[u].push_back(v); 
+        adj[v].push_back(u); 
+    }
+    vector<ll>vis(n+1,0),parent(n+1,0); 
+    vis[1]=1; parent[1]=0; 
+    queue<pair<ll,ll>>q; 
+    q.push({1,1}); 
+    while(!q.empty()){
+        auto node  = q.front(); 
+        q.pop(); 
+        ll val = node.first; 
+        ll lvl = node.second; 
+        for(auto it : adj[val]){
+            if(vis[it])continue; 
+            level[lvl+1].push_back(it); 
+            q.push({it,lvl+1}); 
+            vis[it] = 1; 
+            parent[it] = val ;
+        }
+    }
+    ll ans = LLONG_MAX,pre=0,fixed=0; 
+    for(ll i = n; i>0 ; i--){
+        for(auto it : level[i]){
+            if(parent[it]==0)continue; 
+            fixed+=func(parent,it);
+        }
+        ans=min(ans,n-fixed+pre-1); 
+        pre+=level[i].size(); 
+    } 
+    cout<<ans<<endl;
+}
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif   
+   int t = 1;
+   cin>>t;
+   while(t--)fun(); 
+   return 0 ; 
+}

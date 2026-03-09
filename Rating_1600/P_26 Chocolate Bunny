@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MOD = 1e9+7;
+const int MAXN = 1e6 + 5;
+#define ll long long
+#define all(x) (x).begin(), (x).end()
+#define allr(x) (x).rbegin(), (x).rend()
+ll modpow(ll base, ll exp) {
+    ll result = 1;
+    base %= MOD;
+    while (exp > 0) {
+        if (exp & 1) result = (result * base) % MOD;
+        base = (base * base) % MOD;
+        exp >>= 1;
+    }
+    return result;
+}
+ll modinv(ll a){
+    return modpow(a,MOD-2);
+}
+vector<ll> fact(MAXN);
+void precomputeFact(){
+    fact[0] = 1;
+    for(int i=1; i<MAXN; i++){
+        fact[i] = (fact[i-1]*i) % MOD;
+    }
+}
+ll nCr(int n,int r){
+    if(r>n || r<0) return 0;
+    ll denom = (fact[r] * fact[n-r]) % MOD;
+    return (fact[n]*modinv(denom)) % MOD;
+}
+    
+bool func(ll m,vector<ll>&a,vector<ll>&b,ll n){ 
+    ll cnt = 0 ; 
+    for(ll i =1;i<=n;i++){ 
+        if(b[i]>=cnt && a[i]>= m-cnt-1)cnt++;
+    } 
+    return cnt>=m;
+}   
+
+ll what_val(vector<ll>ans,ll n){
+    ll cnt = 0;
+    sort(ans.begin(),ans.end()); 
+    for(ll i=1;i<=n;i++){
+        if(ans[i]==cnt)cnt++; 
+        else return cnt ;
+    }
+     return cnt; 
+}
+
+void fun(){
+    ll n;cin>>n; 
+    vector<ll>ans(n+1,0); 
+    ll low = 1, high = n; 
+
+    while(low<=high){
+        if(low==high){
+            ans[low] = what_val(ans,n);
+            low++; 
+        }
+        else{
+            ll val1,val2;
+            cout<<"? "<<low<<" "<<high<<endl;
+            cin>>val1;
+            cout<<"? "<<high<<" "<<low<<endl;
+            cin>>val2;
+            if(val1<val2){
+                ans[high]=val2;
+                high--; 
+            }else{
+                ans[low]=val1; 
+                low++;
+            }
+        }
+    }
+    for(ll i=0;i<=n;i++){
+        if(i==0)cout<<"! "; 
+        else cout<<ans[i]<<" ";
+    }
+    cout<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif  
+   int t = 1;
+   //cin>>t;
+   while(t--)fun(); 
+   return 0 ; 
+}

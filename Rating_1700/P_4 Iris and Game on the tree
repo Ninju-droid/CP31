@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+void fun() {
+    ll n;cin>>n; 
+    vector<vector<ll>>adj(n+1); 
+    for(ll i=1;i<n;i++){
+        ll u,v;cin>>u>>v;
+        adj[u].push_back(v); 
+        adj[v].push_back(u); 
+    }
+    string s ; cin>>s; 
+    ll cnt_q=0, cnt_z=0, cnt_o=0 , cnt=0; 
+    for(ll i=2;i<=n;i++){
+        if(adj[i].size()==1){
+            if(s[i-1]=='1')cnt_o++; 
+            else if(s[i-1]=='0')cnt_z++; 
+            else cnt_q++; 
+        }
+        else if(s[i-1]=='?') cnt++;
+    }
+    ll ans = 0 ; 
+    if(s[0]=='?'){
+        if(cnt_o == cnt_z && cnt % 2){
+            ans += cnt_o;
+            ans += (cnt_q+1)/2;
+        }
+        else{
+            ans += max(cnt_o,cnt_z);
+            ans += cnt_q/2;
+        }
+    }
+    else if(s[0]=='1'){
+        ans+= cnt_z; 
+        ans+= (cnt_q+1)/2; 
+    }
+    else{
+        ans+= cnt_o; 
+        ans+= (cnt_q+1)/2; 
+    }
+    cout<<ans<<endl;
+}
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif   
+   int t = 1;
+   cin>>t;
+   while(t--)fun(); 
+   return 0 ; 
+}

@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+void fun() {
+    ll l=1,r = 999 ; 
+    while(r-l>2){
+        ll a = (2*l+r)/3;
+        ll b = (l+2*r)/3; 
+
+        cout<<"? "<<a<<" "<<b<<endl;
+        ll in; cin>>in ; 
+        if(in==a*b){
+            l = b ; 
+        }else if(in==(a+1)*(b+1)){
+            r = a; 
+        }else{
+            l = a; r = b ;
+        }
+    }
+    if(r-l==2){
+        cout<<"? "<<1<<" "<<l+1<<endl; 
+        ll in;cin>>in; 
+        if(in==l+2){
+            r = l+1; 
+        }
+    }
+    cout<<"! "<<r<<endl;
+}
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif   
+   int t = 1;
+   cin>>t;
+   while(t--)fun(); 
+   return 0 ; 
+}
