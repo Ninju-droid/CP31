@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+void fun() {
+   string s;cin>>s; 
+   ll n = s.size(); 
+   ll maxi = n/2; 
+   
+   for(ll k=maxi;k>=1;k--){
+        for(ll i=0;i<=n-2*k;i++){
+            ll l=i,r=i+k,fix=i+k ; 
+            while(l<fix && (s[l]==s[r] || s[l]=='?' || s[r]=='?')){
+                l++;
+                r++; 
+            }
+            if(l==fix){
+                cout<<2*k<<endl;
+                return ; 
+            }
+            i = l;
+        } 
+   }
+   cout<<0<<endl;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif   
+   int t = 1;
+   cin>>t;
+   while(t--)fun(); 
+   return 0 ; 
+}
