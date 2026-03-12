@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+void fun() {
+    ll n,m,k;cin>>n>>m>>k; 
+    vector<vector<ll>>vec(n,vector<ll>(m)); 
+
+    for(ll i=0;i<n;i++){
+        for(ll j=0;j<m;j++)cin>>vec[i][j]; 
+    }
+    vector<string>s(n); 
+    for(ll i=0;i<n;i++)cin>>s[i]; 
+
+    ll cnt1=0,cnt2=0; 
+    for(ll i=0;i<n;i++){
+        for(ll j=0;j<m;j++){
+            if(s[i][j]=='0')cnt1+=vec[i][j];
+            else cnt2+=vec[i][j];
+        } 
+    } 
+    ll diff = abs(cnt1-cnt2);  
+    if(diff==0){
+        cout<<"YES"<<endl; 
+        return; 
+    }
+    set<ll>st; 
+    for(ll b = 0; b<=(n-k);b++){
+        for(ll a = k-1; a<m;a++){
+            if(a==k-1){
+                cnt1=0,cnt2=0;
+                for(ll i=0;i<k;i++){
+                    for(ll j=0;j<k;j++){
+                        if(s[b+i][j]=='0')cnt1++;
+                        else cnt2++; 
+                    }
+                }
+            }
+            else{
+                for(ll i=0;i<k;i++){
+                    if(s[i+b][a]=='0')cnt1++; 
+                    else cnt2++; 
+                }
+                for(ll i=0;i<k;i++){
+                    if(s[i+b][a-k]=='0')cnt1--; 
+                    else cnt2--; 
+                }
+            }
+            st.insert(abs(cnt1-cnt2));
+        }
+    } 
+    ll g = 0 ; 
+    while(!st.empty()){
+        ll val = *st.begin();
+        g = __gcd(g,val);
+        st.erase(st.begin());
+    }
+    if(g==0)cout<<"NO"<<endl;
+    else if(diff%g==0)cout<<"YES"<<endl;
+    else cout<<"NO"<<endl; 
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif   
+   int t = 1;
+   cin>>t;
+   while(t--)fun(); 
+   return 0 ; 
+}
+
