@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>   
+using namespace std;  
+typedef long long ll;  
+ll const  MOD = 998244353;  
+
+void fun() {
+    ll n,m;cin>>n>>m; 
+    vector<ll>a(n,0),b(m,0); 
+    for(int i=0;i<n;i++)cin>>a[i]; 
+    for(int i=0;i<m;i++)cin>>b[i]; 
+    sort(b.rbegin(),b.rend());
+    int i=0,j=0; 
+    vector<ll>ans; 
+    while(i<n && j<m){
+        if(b[j]>=a[i])ans.push_back(b[j++]);
+        else ans.push_back(a[i++]);
+    }
+    while(i<n){
+        ans.push_back(a[i++]);
+    }
+    while(j<m){
+        ans.push_back(b[j++]);
+    }
+
+    for(auto it:ans){
+        cout<<it<<" "; 
+    }
+    cout<<endl;
+}
+
+int main() {
+ 
+#ifndef ONLINE_JUDGE
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+#endif
+    int t=1;
+    cin>>t;
+    while(t--) fun();
+    return 0;
+}
